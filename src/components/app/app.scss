@@ -1,0 +1,167 @@
+$main_color: #28273c;
+$secondary_color: #e88500;
+
+button {
+  font-family: inherit;
+  font-size: 1.4rem;
+  transition: 100ms ease;
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+.error {
+  $error_color: #c92828;
+  padding: 2rem;
+  text-align: center;
+  border: 1px solid darken($error_color, 5%);
+  position: relative;
+  z-index: 1;
+  color: rgba(255, 255, 255, 0.9);
+  background-color: $error_color;
+
+  svg {
+    font-size: 1.8rem;
+  }
+
+  &-dismiss {
+    position: absolute;
+    top: 10px;
+    right: 1px;
+    appearance: none;
+    border: 0;
+    background: none;
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+  }
+}
+
+#app {
+  max-width: 1280px;
+  margin: 40px auto;
+  color: #fff;
+  border-radius: 4px;
+  border: 1px solid darken($main_color, 10%);
+  background: $main_color;
+
+  .control-panel {
+    padding: 2rem;
+    background: darken($main_color, 5%);
+    border-bottom: 1px solid #111;
+    button {
+      background-color: lighten($main_color, 5%);
+      border: 1px solid lighten($main_color, 10%);
+      padding: 0.6rem 1rem;
+      margin-right: 1rem;
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 1.3rem;
+      cursor: pointer;
+      transition: 100ms ease;
+      border-radius: 10px;
+    }
+  }
+
+  .notes {
+    display: grid;
+    grid-row-gap: 1rem;
+    @media screen and (min-width: 780px) {
+      grid-template-columns: 1fr 2fr;
+      grid-template-areas: 'list edit';
+      grid-column-gap: 1.5rem;
+    }
+
+    .list-wrapper {
+      padding: 0;
+      background: darken($main_color, 5%);
+      border-right: 1px solid #111;
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        li {
+          padding: 1rem 1rem 1rem 2rem;
+          cursor: pointer;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+          &.active {
+            background: $secondary_color;
+            color: #111;
+            position: relative;
+            z-index: 1;
+            &::before {
+              position: absolute;
+              content: '';
+              width: 8px;
+              height: 100%;
+              right: 100%;
+              top: 0;
+              bottom: 0;
+              display: block;
+              background: darken($main_color, 5%);
+            }
+          }
+          &:not(.active):hover {
+            background: rgba(255, 255, 255, 0.1);
+          }
+        }
+      }
+      button {
+        width: 100%;
+        display: block;
+        appearance: none;
+        background: #fff;
+        padding: 0.6rem 1rem;
+        border: 1px solid #ddd;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
+      grid-area: 'list';
+    }
+    .edit-pane {
+      grid-area: 'edit';
+      padding: 2rem 2rem 2rem 0;
+      form {
+        display: grid;
+        grid-row-gap: 1rem;
+        .input {
+          display: block;
+          width: 100%;
+          padding: 0.8rem;
+          border: none;
+          border-radius: 5px;
+          background: rgba(255, 255, 255, 0.2);
+          color: rgba(255, 255, 255, 0.7);
+        }
+        .btn {
+          display: inline-block;
+          appearance: none;
+          padding: 0.7rem 1.5rem;
+          text-align: center;
+          border: 1px solid transparent;
+          border-radius: 4px;
+          cursor: pointer;
+          background: transparent;
+          color: rgba(255, 255, 255, 0.8);
+
+          &-action {
+            margin-right: 0.7rem;
+            color: $secondary_color;
+            border-color: $secondary_color;
+            opacity: 0.9;
+            &:hover {
+              opacity: 1;
+            }
+            // background-color: rgba(255,255,255,.3);
+          }
+          &-cancel {
+            color: rgba(255, 255, 255, 0.7);
+          }
+        }
+      }
+    }
+  }
+
+  .empty {
+    padding: 2rem;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.7);
+  }
+}
